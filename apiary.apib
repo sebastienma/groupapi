@@ -1,0 +1,311 @@
+FORMAT: 1A
+HOST: http://www.google.com
+
+# GroupAPI
+
+Manage the social groups of a user.
+
+# Group Invitation
+
+**Invitation API**
+
+## Create an invitation [/invitation?user_token=zefopkezf]
+
+### Invite a user to the group [POST]
+
++ Only creator can invite someone to join the group.
++ If not creator, an error is send
++ If ok, a raw is added to the invitation table. The invitation raw has a state "SEND", "ACCEPTED", "REFUSED" etc.
++ Notification is send to user using the "favoriteProviderForNotification" field.
++ Invitation is usefull only for private group.
+
++ Parameters
+
+    + user_token (required, string, `zefopkezf`) ... User's token
+    
++ Request (application/json)
+
+    + Body
+    
+            {"userId" : "5456", "groupId" : "2"}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "groupId" : "2",
+                "userId" : "5456",
+                "state" : "SEND",
+                "date" : "2013-10-31 08:00:00
+            }
+
+## Refuse invitation [/invitation/refuse?group_id=1&user_token=zefopkezf]
+
+### Refuse an invitation [PUT]
+
++ User need to be add in the invitation list before refuse
++ If user has already answer to the invitation : error
++ Accept an invitation doesn t exist because the good way to accept an invitation is subscribe to the group
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric id of the group of the invitation to perform action with.
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "result" : "You have refused the invitation with success"
+            }
+
+## Invitation List [/invitation/list/?user_token=zefopkezf]
+
+### List all Invitations of the user [GET]
+
++ The only constraint is that user must be logged
+
++ Parameters
+
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+            [{
+                "groupId" : "1",
+                "groupName" : "Ben's family",
+                "expiry" : "NULL",
+                "date" : "2013-10-31 08:00:00
+            }, {
+                "id" : "2",
+                "group_id" : "2",
+                "group_name" : "Nadia's family",
+                "expiry" : "NULL",
+                "date" : "2013-10-31 08:00:00
+            }]
+
+# Group Group
+
+**Group API**
+
+## Groups [/group/?user_token=zefopkezf]
+
+### Create a group [POST]
+
++ Creator is admin of its group.
++ Group types are : "public", "private", "private-with-token"
++ Admin is added to the member list of the group
+    
++ Parameters
+
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Request (application/json)
+
+        {"name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false"}
+
++ Response 200 (application/json)
+
+        {
+            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+        }
+
+## Share [/group/{group_id}/share/?provider=facebook&user_token=zefopkezf]
+
+### Share the group URL on a provider [POST]
+
++ Only creator can share group URL ? If ok, group URL is shared on the provider described in the URL parameter
++ If group is private-with-token type, it's the private URL which is shared
++ If group is private, an error is send
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric id of the Group to perform action with.
+    + provider (required, string, `facebook`) ... Facebook, Tweeter, Mail, SMS, etc.
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+        {
+            "result" : "Shared with success"
+        }
+
+## Subscribing a group [/group/{group_id}/subscribe?group_token=efzkof44&user_token=zefopkezf]
+
+### Subscribe a group [POST]
+
++ Subscribe to the group
++ Every body can subscribe to a public group
++ A raw is added to the user_group table.
++ user_group table link user table and group table.
++ Message is send to user to inform him that he was accepted to the group.
++ If group is "private-with-token" type, user need to add the valid "group_token" parameter
++ If group is "private" type, user need to be referenced in the invitation table
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
+    + group_token (optional, string, `fzeopkfez`) ... token for private-with-token group.
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+        {
+            "result" : "You subscribed with success"
+        }
+
+## My groups [/group/myList?user_token=zefopkezf]
+
+### Get my group list [GET]
+
++ Get all groups that i subscribed
+
++ Parameters
+
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+        [{
+            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+        },{
+            "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+        }]
+        
+## Publics Groups [/group/publicList?user_token=zefopkezf]
+
+### Publics Groups [GET]
+
++ Get all publics groups
+
++ Parameters
+
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+        [{
+            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+        },{
+            "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+        }]
+
+## Publics Groups [/group/{group_id}?user_token=zefopkezf]
+
+### One group [GET]
+
++ Get one group
+
++ Parameters
+
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+        [{
+            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+        }]
+        
+# Group Message
+
+**Message API**
+
+## Messaging a group [/group/{group_id}/message?user_token=zefopkezf]
+
+### Send a message on a group [POST]
+
++ Post a message on a group
++ User need to be a member of the group
++ Every user of public group can post message if readonly = false
++ The message is added to the message table.
++ Message is send to all users of the group. It uses "favoriteProviderForNotification" field to send the message
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Request (application/json)
+    
+        {"text" : "I love Ben !"}
+
++ Response 200 (application/json)
+
+        {
+            "id" : "1",
+            "text" : "I love Ben !",
+            "date" : "2013-10-31 08:00:00",
+            "groupId": "1",
+            "userId": "1"
+        }
+
+## Single message of a Group  [/group/{group_id}/message/{message_id}/?user_token=zefopkezf]
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
+    + message_id (required, number, `1`) ... Numeric `id` of the Message to perform action with.
+    + user_token (required, string, `zefopkezf`) ... User's token
+
+### Delete a single message [DELETE]
+
++ Delete a message on a group
++ Only group admin or creator of the message can delete a message.
++ If ok, the raw is deleted in the table message.
+    
++ Response 200 (application/json)
+
+        {
+            "result" : "Message deleted with success"
+        }
+
+### Edit a single message [PUT]
+
++ Edit a message
++ Only group admin or creator of the message can edit a message.
++ If ok, the raw is updated in the table message.
+
++ Request (application/json)
+
+        {"text" : "I hate Ben !"}
+
++ Response 200 (application/json)
+
+        {
+            "id" : "1",
+            "text" : "I hate Ben !",
+            "date" : "2013-10-31 08:00:00",
+            "groupId": 1,
+            "userId": 1
+        }
+
+## Message list of a Group  [/group/{group_id}/message/list?user_token=zefopkezf]
+
+### Get the list [GET]
+
++ Get all messages of the group
++ Every body can read messages of a public group
++ For private group, user must be in the member list of the group
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+        [{
+            "id" : "1",
+            "text" : "Hello everybody !",
+            "date" : "2013-10-31 08:00:00",
+            "groupId": 1,
+            "userId": 1
+        }, {
+            "id" : "2",
+            "text" : "Bye everybody !",
+            "date" : "2013-10-31 23:00:00",
+            "groupId": 1,
+            "userId": 1
+        }]
