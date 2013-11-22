@@ -223,6 +223,25 @@ Manage the social groups of a user.
         [{
             "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
         }]
+
+### Update a group [PUT]
+
++ Update a group
+
++ Parameters
+
+    + user_token (required, string, `zefopkezf`) ... User's token
+
+
++ Request (application/json)
+
+        {"name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false"}
+
++ Response 200 (application/json)
+
+        [{
+            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+        }]
         
 # Group Message
 
