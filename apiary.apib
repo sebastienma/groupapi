@@ -195,6 +195,7 @@ Manage the social groups of a user.
 ### Publics Groups [GET]
 
 + Get all publics groups
++ Return Group + a "subscribed" filed that tell if current user is subscibed to this group
 
 + Parameters
 
@@ -203,9 +204,9 @@ Manage the social groups of a user.
 + Response 200 (application/json)
 
         [{
-            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "true"
         },{
-            "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+            "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "false"
         }]
 
 ## Publics Groups [/group/{group_id}?user_token=zefopkezf]
