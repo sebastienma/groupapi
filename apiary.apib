@@ -156,6 +156,21 @@ Manage the social groups of a user.
             "result" : "You subscribed with success"
         }
 
+### Subscribe a group [DELETE]
+
++ Unsubscribe from a group
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+        {
+            "result" : "You unsubscribe with success"
+        }
+        
 ## My groups [/group/myList?user_token=zefopkezf]
 
 ### Get my group list [GET]
