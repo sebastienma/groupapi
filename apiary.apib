@@ -80,17 +80,17 @@ Manage the social groups of a user.
                 "result" : "You have refused the invitation with success"
             }
 
-## Invitation List [/invitation/list/{invitation_state}?user_token=zefopkezf]
+## Invitation List [/invitation/{invitation_state}/list?user_token=zefopkezf]
 
 ### List all Invitations of the user [GET]
 
 + The only constraint is that user must be logged
-+ If state is null 
++ If state is null, no filtering is applied
 
 + Parameters
 
     + user_token (required, string, `zefopkezf`) ... User's token
-    + invitation_state (optional, string, `SEND`) ... State to filter
+    + invitation_state (optional, string, `SEND`) ... Filter results to this state
 
 + Response 200 (application/json)
 
@@ -107,15 +107,17 @@ Manage the social groups of a user.
                 "date" : "2013-10-31 08:00:00
             }]
 
-## Invitation Count [/invitation/count?user_token=zefopkezf]
+## Invitation Count [/invitation/{invitation_state}/count?user_token=zefopkezf]
 
 ### Get invitation count for the user [GET]
 
 + User must be logged in
++ If state is null, no filtering is applied
 
 + Parameters
 
     + user_token (required, string, `zefopkezf`) ... User's token
+    + invitation_state (optional, string, `SEND`) ... Filter results to this state
 
 + Response 200 (application/json)
 
