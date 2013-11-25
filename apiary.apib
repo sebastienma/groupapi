@@ -40,9 +40,9 @@ Manage the social groups of a user.
                 "date" : "2013-10-31 08:00:00
             }
 
-## Accept an invitation [/invitation/accept?group_id=1&user_token=zefopkezf]
+## An invitation [/invitation/{group_id}?user_token=zefopkezf]
 
-### Accept an invitation [GET]
+### Accept an invitation [PUT]
 
 + User must have recieved an invitation before accept it
 + If user has already answer to the invitation : error
@@ -59,10 +59,8 @@ Manage the social groups of a user.
             {
                 "result" : "You have accepted the invitation with success"
             }
-            
-## Refuse an invitation [/invitation/refuse?group_id=1&user_token=zefopkezf]
-
-### Refuse an invitation [GET]
+    
+### Refuse an invitation [DELETE]
 
 + User must have recieved an invitation before refuse it
 + If user has already answer to the invitation : error
