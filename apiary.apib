@@ -40,9 +40,30 @@ Manage the social groups of a user.
                 "date" : "2013-10-31 08:00:00
             }
 
-## Refuse invitation [/invitation/refuse?group_id=1&user_token=zefopkezf]
+## Accept an invitation [/invitation/accept?group_id=1&user_token=zefopkezf]
 
-### Refuse an invitation [PUT]
+### Accept an invitation [GET]
+
++ User need to be add in the invitation list before refuse
++ If user has already answer to the invitation : error
++ Accept an invitation doesn t exist because the good way to accept an invitation is subscribe to the group
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric id of the group of the invitation to perform action with.
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "result" : "You have accepted the invitation with success"
+            }
+            
+## Refuse an invitation [/invitation/refuse?group_id=1&user_token=zefopkezf]
+
+### Refuse an invitation [GET]
 
 + User need to be add in the invitation list before refuse
 + If user has already answer to the invitation : error
