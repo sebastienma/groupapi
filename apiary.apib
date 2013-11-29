@@ -246,7 +246,26 @@ Manage the social groups of a user.
             "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "false"
         }]
 
-## Publics Groups [/group/{group_id}?user_token=zefopkezf]
+## All Groups [/group/list?user_token=zefopkezf]
+
+### Get all Groups [GET]
+
++ Needs ROLE_ADMIN
++ Get all groups
+
++ Parameters
+
+    + user_token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+        [{
+            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "true"
+        },{
+            "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "false"
+        }]
+        
+## One Group [/group/{group_id}?user_token=zefopkezf]
 
 ### One group [GET]
 
