@@ -292,13 +292,13 @@ Manage the social groups of a user.
 
 + Request (application/json)
 
-        {"name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false"}
+        {"name" : "Ben's fan", "userId": "12", "type" : "public" , "expiry" : "NULL", "readOnly" : "false"}
 
 + Response 200 (application/json)
 
-        [{
-            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
-        }]
+        {
+            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "12"
+        }
         
 ### Delete a group [DELETE]
 
