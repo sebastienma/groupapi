@@ -300,6 +300,22 @@ Manage the social groups of a user.
             "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
         }]
         
+### Delete a group [DELETE]
+
++ Delete a group
++ Needs to be owner of the group or have ROLE_ADMIN
+
++ Parameters
+
+    + user_token (required, string, `zefopkezf`) ... User's token
+
+
++ Response 200 (application/json)
+
+        {
+            "restul" : "Group deleted"
+        }
+        
 # Group Message
 
 **Message API**
