@@ -357,6 +357,20 @@ Manage the social groups of a user
     + message_id (required, number, `1`) ... Numeric `id` of the Message to perform action with.
     + user_token (required, string, `zefopkezf`) ... User's token
 
+### Get a single message [GET]
+
++ Get a single message
+
++ Response 200 (application/json)
+
+        {
+            "id" : "1",
+            "text" : "I hate Ben !",
+            "date" : "2013-10-31 08:00:00",
+            "groupId": 1,
+            "userId": 1
+        }
+        
 ### Delete a single message [DELETE]
 
 + Delete a message on a group
