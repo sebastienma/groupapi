@@ -9,7 +9,7 @@ Manage the social groups of a user
 
 **Invitation API**
 
-## Create an invitation [/invitation?user_token=zefopkezf]
+## Create an invitation [/invitation?token=zefopkezf]
 
 ### Invite a user to the group [POST]
 
@@ -21,7 +21,7 @@ Manage the social groups of a user
 
 + Parameters
 
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
     
 + Request (application/json)
 
@@ -40,7 +40,7 @@ Manage the social groups of a user
                 "date" : "2013-10-31 08:00:00
             }
 
-## An invitation [/invitation/{group_id}?user_token=zefopkezf]
+## An invitation [/invitation/{group_id}?token=zefopkezf]
 
 ### Accept an invitation [PUT]
 
@@ -51,7 +51,7 @@ Manage the social groups of a user
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric id of the group of the invitation to perform action with.
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
 
@@ -70,7 +70,7 @@ Manage the social groups of a user
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric id of the group of the invitation to perform action with.
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
 
@@ -80,7 +80,7 @@ Manage the social groups of a user
                 "result" : "You have refused the invitation with success"
             }
 
-## Invitation List [/invitation/list?state={invitation_state}&user_token=zefopkezf]
+## Invitation List [/invitation/list?state={invitation_state}&token=zefopkezf]
 
 ### List all Invitations of the user [GET]
 
@@ -89,7 +89,7 @@ Manage the social groups of a user
 
 + Parameters
 
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
     + invitation_state (optional, string, `SEND`) ... Filter results to this state
 
 + Response 200 (application/json)
@@ -107,7 +107,7 @@ Manage the social groups of a user
                 "date" : "2013-10-31 08:00:00
             }]
 
-## Invitation Count [/invitation/count?state={invitation_state}&user_token=zefopkezf]
+## Invitation Count [/invitation/count?state={invitation_state}&token=zefopkezf]
 
 ### Get invitation count for the user [GET]
 
@@ -116,7 +116,7 @@ Manage the social groups of a user
 
 + Parameters
 
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
     + invitation_state (optional, string, `SEND`) ... Filter results to this state
 
 + Response 200 (application/json)
@@ -127,7 +127,7 @@ Manage the social groups of a user
 
 **Group API**
 
-## Groups [/group/?user_token=zefopkezf]
+## Groups [/group/?token=zefopkezf]
 
 ### Create a group [POST]
 
@@ -137,7 +137,7 @@ Manage the social groups of a user
     
 + Parameters
 
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Request (application/json)
 
@@ -149,7 +149,7 @@ Manage the social groups of a user
             "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
         }
 
-## Share [/group/{group_id}/share/?provider=facebook&user_token=zefopkezf]
+## Share [/group/{group_id}/share/?provider=facebook&token=zefopkezf]
 
 ### Share the group URL on a provider [POST]
 
@@ -161,7 +161,7 @@ Manage the social groups of a user
 
     + group_id (required, number, `1`) ... Numeric id of the Group to perform action with.
     + provider (required, string, `facebook`) ... Facebook, Tweeter, Mail, SMS, etc.
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
 
@@ -169,7 +169,7 @@ Manage the social groups of a user
             "result" : "Shared with success"
         }
 
-## Subscribing a group [/group/{group_id}/subscribe?group_token=efzkof44&user_token=zefopkezf]
+## Subscribing a group [/group/{group_id}/subscribe?group_token=efzkof44&token=zefopkezf]
 
 ### Subscribe a group [POST]
 
@@ -185,7 +185,7 @@ Manage the social groups of a user
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
     + group_token (optional, string, `fzeopkfez`) ... token for private-with-token group.
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
 
@@ -201,7 +201,7 @@ Manage the social groups of a user
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
 
@@ -209,7 +209,7 @@ Manage the social groups of a user
             "result" : "You unsubscribe with success"
         }
         
-## My groups [/group/myList?user_token=zefopkezf]
+## My groups [/group/mySubscribedGroupList?token=zefopkezf]
 
 ### Get my group list [GET]
 
@@ -217,7 +217,7 @@ Manage the social groups of a user
 
 + Parameters
 
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
 
@@ -227,7 +227,7 @@ Manage the social groups of a user
             "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
         }]
         
-## Publics Groups [/group/publicList?user_token=zefopkezf]
+## Publics Groups [/group/publicList?token=zefopkezf]
 
 ### Publics Groups [GET]
 
@@ -236,7 +236,7 @@ Manage the social groups of a user
 
 + Parameters
 
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
 
@@ -246,7 +246,7 @@ Manage the social groups of a user
             "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "false"
         }]
 
-## All Groups [/group/list?user_token=zefopkezf]
+## All Groups [/group/list?token=zefopkezf]
 
 ### Get all Groups [GET]
 
@@ -255,7 +255,7 @@ Manage the social groups of a user
 
 + Parameters
 
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
 
@@ -265,7 +265,7 @@ Manage the social groups of a user
             "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "false"
         }]
         
-## One Group [/group/{group_id}?user_token=zefopkezf]
+## One Group [/group/{group_id}?token=zefopkezf]
 
 ### One group [GET]
 
@@ -273,7 +273,7 @@ Manage the social groups of a user
 
 + Parameters
 
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
 
@@ -287,7 +287,7 @@ Manage the social groups of a user
 
 + Parameters
 
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 
 + Request (application/json)
@@ -307,7 +307,7 @@ Manage the social groups of a user
 
 + Parameters
 
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 
 + Response 200 (application/json)
@@ -320,7 +320,7 @@ Manage the social groups of a user
 
 **Message API**
 
-## Messaging a group [/group/{group_id}/message?user_token=zefopkezf]
+## Messaging a group [/group/{group_id}/message?token=zefopkezf]
 
 ### Send a message on a group [POST]
 
@@ -333,7 +333,7 @@ Manage the social groups of a user
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Request (application/json)
     
@@ -349,13 +349,13 @@ Manage the social groups of a user
             "userId": "1"
         }
 
-## Single message of a Group  [/group/{group_id}/message/{message_id}/?user_token=zefopkezf]
+## Single message of a Group  [/group/{group_id}/message/{message_id}/?token=zefopkezf]
 
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
     + message_id (required, number, `1`) ... Numeric `id` of the Message to perform action with.
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 ### Get a single message [GET]
 
@@ -403,7 +403,7 @@ Manage the social groups of a user
             "userId": 1
         }
 
-## Message list of a Group  [/group/{group_id}/message/list?user_token=zefopkezf]
+## Message list of a Group  [/group/{group_id}/message/list?token=zefopkezf]
 
 ### Get the list [GET]
 
@@ -414,7 +414,7 @@ Manage the social groups of a user
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
-    + user_token (required, string, `zefopkezf`) ... User's token
+    + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
 
