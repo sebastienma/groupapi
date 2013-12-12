@@ -459,7 +459,7 @@ Manage the social groups of a user
             "userId": 1
         }
 
-## Message list of a Group  [/group/{group_id}/message/list?token=zefopkezf]
+## Message list of a Group  [/group/{group_id}/message/list?offset=0&count=5&token=zefopkezf]
 
 ### Get the list [GET]
 
@@ -471,19 +471,26 @@ Manage the social groups of a user
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
     + token (required, string, `zefopkezf`) ... User's token
+    + offset (required, number, `0`) ... First element of the list
+    + count (required, number, `5`) ... Number of element for the list
 
 + Response 200 (application/json)
 
-        [{
-            "id" : "1",
-            "text" : "Hello everybody !",
-            "date" : "2013-10-31 08:00:00",
-            "groupId": 1,
-            "userId": 1
-        }, {
-            "id" : "2",
-            "text" : "Bye everybody !",
-            "date" : "2013-10-31 23:00:00",
-            "groupId": 1,
-            "userId": 1
-        }]
+        {
+            "data":[{
+                "id" : "1",
+                "text" : "Hello everybody !",
+                "date" : "2013-10-31 08:00:00",
+                "groupId": 1,
+                "userId": 1
+            }, {
+                "id" : "2",
+                "text" : "Bye everybody !",
+                "date" : "2013-10-31 23:00:00",
+                "groupId": 1,
+                "userId": 1
+            }],
+            "nbElt": 2,
+            "offset": 0,
+            "nbTotal": 2
+        }
