@@ -285,7 +285,7 @@ Manage the social groups of a user
             "nbTotal": 2
         }
 
-## All Groups [/group/list?token=zefopkezf]
+## All Groups [/group/list?offset=0&count=5&token=zefopkezf]
 
 ### Get all Groups [GET]
 
@@ -295,14 +295,21 @@ Manage the social groups of a user
 + Parameters
 
     + token (required, string, `zefopkezf`) ... User's token
+    + offset (required, number, `0`) ... First element of the list
+    + count (required, number, `5`) ... Number of element for the list
 
 + Response 200 (application/json)
 
-        [{
-            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "true"
-        },{
-            "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "false"
-        }]
+        {
+            "data":[{
+                "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "true", "creator" : "admin"
+            },{
+                "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "false", "creator" : "admin"
+            }],
+            "nbElt" : 2,
+            "offset": 0,
+            "nbTotal": 2
+        }
         
 ## One Group [/group/{group_id}?token=zefopkezf]
 
