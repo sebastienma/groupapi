@@ -80,7 +80,7 @@ Manage the social groups of a user
                 "result" : "You have refused the invitation with success"
             }
 
-## Invitation List [/invitation/list?state={invitation_state}&token=zefopkezf]
+## Invitation List [/invitation/list?offset=0&count&state={invitation_state}&token=zefopkezf]
 
 ### List all Invitations of the user [GET]
 
@@ -91,21 +91,31 @@ Manage the social groups of a user
 
     + token (required, string, `zefopkezf`) ... User's token
     + invitation_state (optional, string, `SEND`) ... Filter results to this state
+    + offset (required, number, `0`) ... First element of the list
+    + count (required, number, `5`) ... Number of element for the list
 
 + Response 200 (application/json)
 
-            [{
+        {
+            "data":[
+            {
                 "groupId" : "1",
                 "groupName" : "Ben's family",
-                "expiry" : "NULL",
-                "date" : "2013-10-31 08:00:00
+                "groupExpiry" : "NULL",
+                "creationDate" : "2013-10-31 08:00:00",
+                "state" : "ACCEPTED"
             }, {
                 "id" : "2",
                 "group_id" : "2",
                 "group_name" : "Nadia's family",
-                "expiry" : "NULL",
-                "date" : "2013-10-31 08:00:00
-            }]
+                "groupExpiry" : "NULL",
+                "creationDate" : "2013-10-31 08:00:00",
+                "state" : "REFUSED"
+            }],
+            "nbElt": 2,
+            "offset": 0,
+            "nbTotal": 2
+        }
 
 ## Invitation Count [/invitation/count?state={invitation_state}&token=zefopkezf]
 
