@@ -297,15 +297,16 @@ Manage the social groups of a user
             "nbTotal": 2
         }
 
-## All Groups [/group/list?offset=0&count=5&token=zefopkezf]
+## All Groups by service id [/group/list?serviceId=1&offset=0&count=5&token=zefopkezf]
 
-### Get all Groups [GET]
+### Get all Groups by service id [GET]
 
 + Needs ROLE_ADMIN
-+ Get all groups
++ Get all groups by service id
 
 + Parameters
 
+    + serviceId (required, number, `1`) ... Numeric `id` of the service of the searched groups
     + token (required, string, `zefopkezf`) ... User's token
     + offset (required, number, `0`) ... First element of the list
     + count (required, number, `5`) ... Number of element for the list
