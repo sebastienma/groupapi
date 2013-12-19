@@ -375,6 +375,23 @@ Manage the social groups of a user
             "restul" : "Group deleted"
         }
         
+## One Group Count User [/group/{group_id}/countUser?token=zefopkezf]
+
+### Count user of a group [GET]
+
++ return the number of user of a group
++ for public groups you don't need to be connected
+
++ Parameters
+
+    + token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+        [{
+            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+        }]
+        
 # Group Message
 
 **Message API**
