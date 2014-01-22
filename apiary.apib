@@ -17,7 +17,7 @@ Manage the social groups of a user
 + If not creator, an error is send
 + If ok, a row is added to the invitation table. The invitation raw has a state "SEND", "ACCEPTED", "REFUSED" etc.
 + Notification is send to user using the "favoriteProviderForNotification" field.
-+ Invitation is usefull only for private group.
++ Invitation is usefull only for PRIVATE group.
 
 + Parameters
 
@@ -27,14 +27,14 @@ Manage the social groups of a user
 
     + Body
     
-            {"userId" : "5456", "groupId" : "2"}
+            {"userId" : "5456", "groupId" : 2}
 
 + Response 200 (application/json)
 
     + Body
 
             {
-                "groupId" : "2",
+                "groupId" : 2,
                 "userId" : "5456",
                 "state" : "SEND",
                 "date" : "2013-10-31 08:00:00
@@ -99,16 +99,16 @@ Manage the social groups of a user
         {
             "data":[
             {
-                "groupId" : "1",
+                "groupId" : 1,
                 "groupName" : "Ben's family",
-                "groupExpiry" : "NULL",
+                "groupExpiry" : null,
                 "creationDate" : "2013-10-31 08:00:00",
                 "state" : "ACCEPTED"
             }, {
-                "id" : "2",
-                "group_id" : "2",
+                "id" : 2,
+                "group_id" : 2,
                 "group_name" : "Nadia's family",
-                "groupExpiry" : "NULL",
+                "groupExpiry" : null,
                 "creationDate" : "2013-10-31 08:00:00",
                 "state" : "REFUSED"
             }],
@@ -142,7 +142,7 @@ Manage the social groups of a user
 ### Create a group [POST]
 
 + Creator is admin of its group.
-+ Group types are : "public", "private", "private-with-token"
++ Group types are : "PUBLIC", "PRIVATE", "PRIVATE-WITH-TOKEN"
 + Admin is added to the member list of the group
     
 + Parameters
@@ -151,12 +151,12 @@ Manage the social groups of a user
 
 + Request (application/json)
 
-        {"name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false"}
+        {"name" : "Ben's fan" , "type" : "PUBLIC", "readOnly" : false}
 
 + Response 200 (application/json)
 
         {
-            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+            "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC", "readOnly" : false, "userId" : 1
         }
 
 ## Share [/group/{group_id}/share/?provider=facebook&token=zefopkezf]
@@ -164,8 +164,8 @@ Manage the social groups of a user
 ### Share the group URL on a provider [POST]
 
 + Only creator can share group URL ? If ok, group URL is shared on the provider described in the URL parameter
-+ If group is private-with-token type, it's the private URL which is shared
-+ If group is private, an error is send
++ If group is PRIVATE-WITH-TOKEN type, it's the PRIVATE URL which is shared
++ If group is PRIVATE, an error is send
 
 + Parameters
 
@@ -188,13 +188,13 @@ Manage the social groups of a user
 + A raw is added to the user_group table.
 + user_group table link user table and group table.
 + Message is send to user to inform him that he was accepted to the group.
-+ If group is "private-with-token" type, user need to add the valid "group_token" parameter
-+ If group is "private" type, user need to be referenced in the invitation table
++ If group is "PRIVATE-WITH-TOKEN" type, user need to add the valid "group_token" parameter
++ If group is "PRIVATE" type, user need to be referenced in the invitation table
 
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
-    + group_token (optional, string, `fzeopkfez`) ... token for private-with-token group.
+    + group_token (optional, string, `fzeopkfez`) ... token for PRIVATE-WITH-TOKEN group.
     + token (required, string, `zefopkezf`) ... User's token
 
 + Response 200 (application/json)
@@ -235,9 +235,9 @@ Manage the social groups of a user
 
         {
             "data":[{
-                "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+                "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "readOnly" : false, "userId" : 1
             },{
-                "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+                "id" : 4 , "name" : "Nadia's fan" , "type" : "PUBLIC" , "readOnly" : false, "userId" : 1
             }],
             "nbElt" : 2,
             "offset": 0,
@@ -260,9 +260,9 @@ Manage the social groups of a user
 
         {
             "data":[{
-                "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+                "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "readOnly" : false, "userId" : 1
             },{
-                "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+                "id" : 4 , "name" : "Nadia's fan" , "type" : "PUBLIC" , "readOnly" : false, "userId" : 1
             }],
             "nbElt" : 2,
             "offset": 0,
@@ -288,9 +288,9 @@ Manage the social groups of a user
 
         {
             "data":[{
-                "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "true", "creator" : "admin"
+                "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1, "subscribed": true, "creator" : "admin"
             },{
-                "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "false", "creator" : "admin"
+                "id" : 4 , "name" : "Nadia's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1, "subscribed": false, "creator" : "admin"
             }],
             "nbElt" : 2,
             "offset": 0,
@@ -315,9 +315,9 @@ Manage the social groups of a user
 
         {
             "data":[{
-                "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "true", "creator" : "admin"
+                "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1, "subscribed": true, "creator" : "admin"
             },{
-                "id" : "4" , "name" : "Nadia's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1", "subscribed": "false", "creator" : "admin"
+                "id" : 4 , "name" : "Nadia's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1, "subscribed": false, "creator" : "admin"
             }],
             "nbElt" : 2,
             "offset": 0,
@@ -337,7 +337,7 @@ Manage the social groups of a user
 + Response 200 (application/json)
 
         [{
-            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+            "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1
         }]
 
 ### Update a group [PUT]
@@ -351,12 +351,12 @@ Manage the social groups of a user
 
 + Request (application/json)
 
-        {"name" : "Ben's fan", "userId": "12", "type" : "public" , "expiry" : "NULL", "readOnly" : "false"}
+        {"name" : "Ben's fan", "userId": 12, "type" : "PUBLIC" , "expiry" : null, "readOnly" : false}
 
 + Response 200 (application/json)
 
         {
-            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "12"
+            "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 12
         }
         
 ### Delete a group [DELETE]
@@ -389,7 +389,7 @@ Manage the social groups of a user
 + Response 200 (application/json)
 
         [{
-            "id" : "3" , "name" : "Ben's fan" , "type" : "public" , "expiry" : "NULL", "readOnly" : "false", "userId" : "1"
+            "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1
         }]
         
 # Group Message
@@ -418,11 +418,11 @@ Manage the social groups of a user
 + Response 200 (application/json)
 
         {
-            "id" : "1",
+            "id" : 1,
             "text" : "I love Ben !",
             "date" : "2013-10-31 08:00:00",
-            "groupId": "1",
-            "userId": "1"
+            "groupId": 1,
+            "userId": 1
         }
 
 ## Single message of a Group  [/group/{group_id}/message/{message_id}/?token=zefopkezf]
@@ -440,7 +440,7 @@ Manage the social groups of a user
 + Response 200 (application/json)
 
         {
-            "id" : "1",
+            "id" : 1,
             "text" : "I hate Ben !",
             "date" : "2013-10-31 08:00:00",
             "groupId": 1,
@@ -472,7 +472,7 @@ Manage the social groups of a user
 + Response 200 (application/json)
 
         {
-            "id" : "1",
+            "id" : 1,
             "text" : "I hate Ben !",
             "date" : "2013-10-31 08:00:00",
             "groupId": 1,
@@ -485,7 +485,7 @@ Manage the social groups of a user
 
 + Get all messages of the group
 + Every body can read messages of a public group
-+ For private group, user must be in the member list of the group
++ For PRIVATE group, user must be in the member list of the group
 
 + Parameters
 
@@ -498,13 +498,13 @@ Manage the social groups of a user
 
         {
             "data":[{
-                "id" : "1",
+                "id" : 1,
                 "text" : "Hello everybody !",
                 "date" : "2013-10-31 08:00:00",
                 "groupId": 1,
                 "userId": 1
             }, {
-                "id" : "2",
+                "id" : 2,
                 "text" : "Bye everybody !",
                 "date" : "2013-10-31 23:00:00",
                 "groupId": 1,
