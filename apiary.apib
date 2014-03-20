@@ -165,6 +165,27 @@ Manage the social groups of a user
             "result" : "You unsubscribe with success"
         }
         
+
+## One Group Count User [/group/{group_id}/countUser]
+
+### Count user of a group [GET]
+
++ return the number of user of a group
++ for public groups you don't need to be connected
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
++ Response 200 (application/json)
+
+        [{
+            "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1
+        }]
+
+
 ## My subscribed groups [/group/mySubscribedGroupList?offset=0&count=5]
 
 ### Get my group list [GET]
@@ -294,26 +315,6 @@ Manage the social groups of a user
             "nbTotal": 2
         }
       
-## One Group Count User [/group/{group_id}/countUser]
-
-### Count user of a group [GET]
-
-+ return the number of user of a group
-+ for public groups you don't need to be connected
-
-+ Request
-
-    + Headers
-    
-            token: the token of the currently connected user
-            
-+ Response 200 (application/json)
-
-        [{
-            "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1
-        }]
-
-
 # Group Invitation
 
 **Invitation API**
@@ -528,24 +529,6 @@ Manage the social groups of a user
             "groupId": 1,
             "userId": 1
         }
-        
-### Delete a single message [DELETE]
-
-+ Delete a message on a group
-+ Only group admin or creator of the message can delete a message.
-+ If ok, the raw is deleted in the table message.
-    
-+ Request
-
-    + Headers
-    
-            token: the token of the currently connected user
-
-+ Response 200 (application/json)
-
-        {
-            "result" : "Message deleted with success"
-        }
 
 ### Edit a single message [PUT]
 
@@ -573,6 +556,25 @@ Manage the social groups of a user
             "userId": 1
         }
 
+        
+### Delete a single message [DELETE]
+
++ Delete a message on a group
++ Only group admin or creator of the message can delete a message.
++ If ok, the raw is deleted in the table message.
+    
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+
++ Response 200 (application/json)
+
+        {
+            "result" : "Message deleted with success"
+        }
+        
 ## Message list of a Group  [/group/{group_id}/message/list?offset=0&count=5]
 
 ### Get the list [GET]
