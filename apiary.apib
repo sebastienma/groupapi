@@ -33,7 +33,64 @@ Manage the social groups of a user
             "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC", "readOnly" : false, "userId" : 1
         }
 
-## Share [/group/{group_id}/share/?provider=facebook&token=zefopkezf]
+  
+## One Group [/group/{group_id}]
+
+### One group [GET]
+
++ Get one group
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
++ Response 200 (application/json)
+
+        [{
+            "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1
+        }]
+
+### Update a group [PUT]
+
++ Update a group
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
+    + Body
+    
+            {"name" : "Ben's fan", "userId": 12, "type" : "PUBLIC" , "expiry" : null, "readOnly" : false}
+
++ Response 200 (application/json)
+
+        {
+            "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 12
+        }
+        
+### Delete a group [DELETE]
+
++ Delete a group
++ Needs to be owner of the group or have ROLE_ADMIN
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+
++ Response 200 (application/json)
+
+        {
+            "restul" : "Group deleted"
+        }
+        
+        
+## Share [/group/{group_id}/share/?provider=facebook]
 
 ### Share the group URL on a provider [POST]
 
@@ -45,15 +102,20 @@ Manage the social groups of a user
 
     + group_id (required, number, `1`) ... Numeric id of the Group to perform action with.
     + provider (required, string, `facebook`) ... Facebook, Tweeter, Mail, SMS, etc.
-    + token (required, string, `zefopkezf`) ... User's token
 
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
 + Response 200 (application/json)
 
         {
             "result" : "Shared with success"
         }
 
-## Subscribing a group [/group/{group_id}/subscribe?group_token=efzkof44&token=zefopkezf]
+## Subscribing a group [/group/{group_id}/subscribe?group_token=efzkof44]
 
 ### Subscribe a group [POST]
 
@@ -69,8 +131,13 @@ Manage the social groups of a user
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
     + group_token (optional, string, `fzeopkfez`) ... token for PRIVATE-WITH-TOKEN group.
-    + token (required, string, `zefopkezf`) ... User's token
 
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
 + Response 200 (application/json)
 
         {
@@ -85,15 +152,20 @@ Manage the social groups of a user
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
-    + token (required, string, `zefopkezf`) ... User's token
 
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
 + Response 200 (application/json)
 
         {
             "result" : "You unsubscribe with success"
         }
         
-## My subscribed groups [/group/mySubscribedGroupList?offset=0&count=5&token=zefopkezf]
+## My subscribed groups [/group/mySubscribedGroupList?offset=0&count=5]
 
 ### Get my group list [GET]
 
@@ -101,10 +173,15 @@ Manage the social groups of a user
 
 + Parameters
 
-    + token (required, string, `zefopkezf`) ... User's token
     + offset (required, number, `0`) ... First element of the list
     + count (required, number, `5`) ... Number of element for the list
 
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
 + Response 200 (application/json)
 
         {
@@ -118,7 +195,7 @@ Manage the social groups of a user
             "nbTotal": 2
         }
         
-## My created groups [/group/myGroupList?offset=0&count=5&token=zefopkezf]
+## My created groups [/group/myGroupList?offset=0&count=5]
 
 ### Get my group list [GET]
 
@@ -126,10 +203,16 @@ Manage the social groups of a user
 
 + Parameters
 
-    + token (required, string, `zefopkezf`) ... User's token
     + offset (required, number, `0`) ... First element of the list
     + count (required, number, `5`) ... Number of element for the list
 
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
 + Response 200 (application/json)
 
         {
@@ -143,7 +226,7 @@ Manage the social groups of a user
             "nbTotal": 2
         }
         
-## Publics Groups [/group/publicGroupList?offset=0&count=5&token=zefopkezf]
+## Publics Groups [/group/publicGroupList?offset=0&count=5]
 
 ### Publics Groups [GET]
 
@@ -154,13 +237,15 @@ Manage the social groups of a user
 
 + Parameters
 
-    + token (required, string, `zefopkezf`) ... User's token
     + offset (required, number, `0`) ... First element of the list
     + count (required, number, `5`) ... Number of element for the list
 
+
 + Request
+
     + Headers
     
+            token: the token of the currently connected user
             X-SocialAPI-Service-Name: name of the service
 
 
@@ -177,7 +262,7 @@ Manage the social groups of a user
             "nbTotal": 2
         }
 
-## All Groups by service name [/group/list?offset=0&count=5&token=zefopkezf]
+## All Groups by service name [/group/list?offset=0&count=5]
 
 ### Get all Groups by service name [GET]
 
@@ -187,7 +272,6 @@ Manage the social groups of a user
 
 + Parameters
 
-    + token (required, string, `zefopkezf`) ... User's token
     + offset (required, number, `0`) ... First element of the list
     + count (required, number, `5`) ... Number of element for the list
 
@@ -195,7 +279,8 @@ Manage the social groups of a user
     + Headers
     
             X-SocialAPI-Service-Name: name of the service
-
+            token: the token of the currently connected user
+            
 + Response 200 (application/json)
 
         {
@@ -208,69 +293,20 @@ Manage the social groups of a user
             "offset": 0,
             "nbTotal": 2
         }
-        
-## One Group [/group/{group_id}?token=zefopkezf]
-
-### One group [GET]
-
-+ Get one group
-
-+ Parameters
-
-    + token (required, string, `zefopkezf`) ... User's token
-
-+ Response 200 (application/json)
-
-        [{
-            "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1
-        }]
-
-### Update a group [PUT]
-
-+ Update a group
-
-+ Parameters
-
-    + token (required, string, `zefopkezf`) ... User's token
-
-
-+ Request (application/json)
-
-        {"name" : "Ben's fan", "userId": 12, "type" : "PUBLIC" , "expiry" : null, "readOnly" : false}
-
-+ Response 200 (application/json)
-
-        {
-            "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 12
-        }
-        
-### Delete a group [DELETE]
-
-+ Delete a group
-+ Needs to be owner of the group or have ROLE_ADMIN
-
-+ Parameters
-
-    + token (required, string, `zefopkezf`) ... User's token
-
-
-+ Response 200 (application/json)
-
-        {
-            "restul" : "Group deleted"
-        }
-        
-## One Group Count User [/group/{group_id}/countUser?token=zefopkezf]
+      
+## One Group Count User [/group/{group_id}/countUser]
 
 ### Count user of a group [GET]
 
 + return the number of user of a group
 + for public groups you don't need to be connected
 
-+ Parameters
++ Request
 
-    + token (required, string, `zefopkezf`) ... User's token
-
+    + Headers
+    
+            token: the token of the currently connected user
+            
 + Response 200 (application/json)
 
         [{
@@ -282,22 +318,22 @@ Manage the social groups of a user
 
 **Invitation API**
 
-## Create an invitation [/invitation?token=zefopkezf]
+## Create an invitation [/invitation]
 
 ### Invite a user to the group [POST]
 
 + Only creator can invite someone to join the group.
 + If not creator, an error is send
-+ If ok, a row is added to the invitation table. The invitation raw has a state "SEND", "ACCEPTED", "REFUSED" etc.
++ If ok, a row is added to the invitation table. The invitation raw has a state "SEND", "ACCEPTED", "REFUSED", etc.
 + Notification is send to user using the "favoriteProviderForNotification" field.
 + Invitation is usefull only for PRIVATE group.
 
-+ Parameters
-
-    + token (required, string, `zefopkezf`) ... User's token
-    
 + Request (application/json)
 
+    + Headers
+    
+            token: the token of the currently connected user
+            
     + Body
     
             {"userId" : "5456", "groupId" : 2}
@@ -313,7 +349,7 @@ Manage the social groups of a user
                 "date" : "2013-10-31 08:00:00
             }
 
-## An invitation [/invitation/{group_id}?token=zefopkezf]
+## An invitation [/invitation/{group_id}]
 
 ### Accept an invitation [PUT]
 
@@ -324,8 +360,13 @@ Manage the social groups of a user
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric id of the group of the invitation to perform action with.
-    + token (required, string, `zefopkezf`) ... User's token
 
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
 + Response 200 (application/json)
 
     + Body
@@ -343,7 +384,13 @@ Manage the social groups of a user
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric id of the group of the invitation to perform action with.
-    + token (required, string, `zefopkezf`) ... User's token
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
 
 + Response 200 (application/json)
 
@@ -353,7 +400,7 @@ Manage the social groups of a user
                 "result" : "You have refused the invitation with success"
             }
 
-## Invitation List [/invitation/list?offset=0&count&state={invitation_state}&token=zefopkezf]
+## Invitation List [/invitation/list?offset=0&count&state={invitation_state}]
 
 ### List all Invitations of the user [GET]
 
@@ -362,11 +409,16 @@ Manage the social groups of a user
 
 + Parameters
 
-    + token (required, string, `zefopkezf`) ... User's token
     + invitation_state (optional, string, `SEND`) ... Filter results to this state
     + offset (required, number, `0`) ... First element of the list
     + count (required, number, `5`) ... Number of element for the list
 
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
 + Response 200 (application/json)
 
         {
@@ -390,7 +442,7 @@ Manage the social groups of a user
             "nbTotal": 2
         }
 
-## Invitation Count [/invitation/count?state={invitation_state}&token=zefopkezf]
+## Invitation Count [/invitation/count?state={invitation_state}]
 
 ### Get invitation count for the user [GET]
 
@@ -399,9 +451,14 @@ Manage the social groups of a user
 
 + Parameters
 
-    + token (required, string, `zefopkezf`) ... User's token
     + invitation_state (optional, string, `SEND`) ... Filter results to this state
 
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
 + Response 200 (application/json)
 
             14
@@ -410,7 +467,7 @@ Manage the social groups of a user
 
 **Message API**
 
-## Messaging a group [/group/{group_id}/message?token=zefopkezf]
+## Messaging a group [/group/{group_id}/message]
 
 ### Send a message on a group [POST]
 
@@ -423,7 +480,13 @@ Manage the social groups of a user
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
-    + token (required, string, `zefopkezf`) ... User's token
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+            
 
 + Request (application/json)
     
@@ -439,17 +502,22 @@ Manage the social groups of a user
             "userId": 1
         }
 
-## Single message of a Group  [/group/{group_id}/message/{message_id}/?token=zefopkezf]
+## Single message of a Group  [/group/{group_id}/message/{message_id}]
 
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
     + message_id (required, number, `1`) ... Numeric `id` of the Message to perform action with.
-    + token (required, string, `zefopkezf`) ... User's token
 
 ### Get a single message [GET]
 
 + Get a single message
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
 
 + Response 200 (application/json)
 
@@ -467,6 +535,12 @@ Manage the social groups of a user
 + Only group admin or creator of the message can delete a message.
 + If ok, the raw is deleted in the table message.
     
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+
 + Response 200 (application/json)
 
         {
@@ -481,7 +555,13 @@ Manage the social groups of a user
 
 + Request (application/json)
 
-        {"text" : "I hate Ben !"}
+    + Headers
+    
+            token: the token of the currently connected user
+
+    + Body
+    
+            {"text" : "I hate Ben !"}
 
 + Response 200 (application/json)
 
@@ -493,7 +573,7 @@ Manage the social groups of a user
             "userId": 1
         }
 
-## Message list of a Group  [/group/{group_id}/message/list?offset=0&count=5&token=zefopkezf]
+## Message list of a Group  [/group/{group_id}/message/list?offset=0&count=5]
 
 ### Get the list [GET]
 
@@ -504,9 +584,14 @@ Manage the social groups of a user
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
-    + token (required, string, `zefopkezf`) ... User's token
     + offset (required, number, `0`) ... First element of the list
     + count (required, number, `5`) ... Number of element for the list
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
 
 + Response 200 (application/json)
 
