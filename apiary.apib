@@ -9,7 +9,7 @@ Manage the social groups of a user
 
 **Group API**
 
-## Groups [/group/?token=zefopkezf]
+## Groups [/group]
 
 ### Create a group [POST]
 
@@ -17,10 +17,6 @@ Manage the social groups of a user
 + Group types are : "PUBLIC", "PRIVATE", "PRIVATE-WITH-TOKEN"
 + Admin is added to the member list of the group
     
-+ Parameters
-
-    + token (required, string, `zefopkezf`) ... User's token
-
 + Request (application/json)
 
         {"name" : "Ben's fan" , "type" : "PUBLIC", "readOnly" : false}
