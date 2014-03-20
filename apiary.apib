@@ -19,7 +19,13 @@ Manage the social groups of a user
     
 + Request (application/json)
 
-        {"name" : "Ben's fan" , "type" : "PUBLIC", "readOnly" : false}
+    + Headers
+    
+            token: the token of the currently connected user
+            
+    + Body
+    
+            {"name" : "Ben's fan" , "type" : "PUBLIC", "readOnly" : false}
 
 + Response 200 (application/json)
 
