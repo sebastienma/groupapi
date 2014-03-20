@@ -5,134 +5,6 @@ HOST: http://www.google.com
 
 Manage the social groups of a user
 
-# Group Invitation
-
-**Invitation API**
-
-## Create an invitation [/invitation?token=zefopkezf]
-
-### Invite a user to the group [POST]
-
-+ Only creator can invite someone to join the group.
-+ If not creator, an error is send
-+ If ok, a row is added to the invitation table. The invitation raw has a state "SEND", "ACCEPTED", "REFUSED" etc.
-+ Notification is send to user using the "favoriteProviderForNotification" field.
-+ Invitation is usefull only for PRIVATE group.
-
-+ Parameters
-
-    + token (required, string, `zefopkezf`) ... User's token
-    
-+ Request (application/json)
-
-    + Body
-    
-            {"userId" : "5456", "groupId" : 2}
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "groupId" : 2,
-                "userId" : "5456",
-                "state" : "SEND",
-                "date" : "2013-10-31 08:00:00
-            }
-
-## An invitation [/invitation/{group_id}?token=zefopkezf]
-
-### Accept an invitation [PUT]
-
-+ Accept an invitation
-+ User must have recieved an invitation before accept it
-+ If user has already answer to the invitation : error
-
-+ Parameters
-
-    + group_id (required, number, `1`) ... Numeric id of the group of the invitation to perform action with.
-    + token (required, string, `zefopkezf`) ... User's token
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "result" : "You have accepted the invitation with success"
-            }
-    
-### Refuse an invitation [DELETE]
-
-+ Refuse an invitation
-+ User must have recieved an invitation before refuse it
-+ If user has already answer to the invitation : error
-
-+ Parameters
-
-    + group_id (required, number, `1`) ... Numeric id of the group of the invitation to perform action with.
-    + token (required, string, `zefopkezf`) ... User's token
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "result" : "You have refused the invitation with success"
-            }
-
-## Invitation List [/invitation/list?offset=0&count&state={invitation_state}&token=zefopkezf]
-
-### List all Invitations of the user [GET]
-
-+ The only constraint is that user must be logged
-+ If state is null, no filtering is applied
-
-+ Parameters
-
-    + token (required, string, `zefopkezf`) ... User's token
-    + invitation_state (optional, string, `SEND`) ... Filter results to this state
-    + offset (required, number, `0`) ... First element of the list
-    + count (required, number, `5`) ... Number of element for the list
-
-+ Response 200 (application/json)
-
-        {
-            "data":[
-            {
-                "groupId" : 1,
-                "groupName" : "Ben's family",
-                "groupExpiry" : null,
-                "creationDate" : "2013-10-31 08:00:00",
-                "state" : "ACCEPTED"
-            }, {
-                "id" : 2,
-                "group_id" : 2,
-                "group_name" : "Nadia's family",
-                "groupExpiry" : null,
-                "creationDate" : "2013-10-31 08:00:00",
-                "state" : "REFUSED"
-            }],
-            "nbElt": 2,
-            "offset": 0,
-            "nbTotal": 2
-        }
-
-## Invitation Count [/invitation/count?state={invitation_state}&token=zefopkezf]
-
-### Get invitation count for the user [GET]
-
-+ User must be logged in
-+ If state is null, no filtering is applied
-
-+ Parameters
-
-    + token (required, string, `zefopkezf`) ... User's token
-    + invitation_state (optional, string, `SEND`) ... Filter results to this state
-
-+ Response 200 (application/json)
-
-            14
-
 # Group Group
 
 **Group API**
@@ -402,7 +274,136 @@ Manage the social groups of a user
         [{
             "id" : 3 , "name" : "Ben's fan" , "type" : "PUBLIC" , "expiry" : null, "readOnly" : false, "userId" : 1
         }]
-        
+
+
+# Group Invitation
+
+**Invitation API**
+
+## Create an invitation [/invitation?token=zefopkezf]
+
+### Invite a user to the group [POST]
+
++ Only creator can invite someone to join the group.
++ If not creator, an error is send
++ If ok, a row is added to the invitation table. The invitation raw has a state "SEND", "ACCEPTED", "REFUSED" etc.
++ Notification is send to user using the "favoriteProviderForNotification" field.
++ Invitation is usefull only for PRIVATE group.
+
++ Parameters
+
+    + token (required, string, `zefopkezf`) ... User's token
+    
++ Request (application/json)
+
+    + Body
+    
+            {"userId" : "5456", "groupId" : 2}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "groupId" : 2,
+                "userId" : "5456",
+                "state" : "SEND",
+                "date" : "2013-10-31 08:00:00
+            }
+
+## An invitation [/invitation/{group_id}?token=zefopkezf]
+
+### Accept an invitation [PUT]
+
++ Accept an invitation
++ User must have recieved an invitation before accept it
++ If user has already answer to the invitation : error
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric id of the group of the invitation to perform action with.
+    + token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "result" : "You have accepted the invitation with success"
+            }
+    
+### Refuse an invitation [DELETE]
+
++ Refuse an invitation
++ User must have recieved an invitation before refuse it
++ If user has already answer to the invitation : error
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric id of the group of the invitation to perform action with.
+    + token (required, string, `zefopkezf`) ... User's token
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "result" : "You have refused the invitation with success"
+            }
+
+## Invitation List [/invitation/list?offset=0&count&state={invitation_state}&token=zefopkezf]
+
+### List all Invitations of the user [GET]
+
++ The only constraint is that user must be logged
++ If state is null, no filtering is applied
+
++ Parameters
+
+    + token (required, string, `zefopkezf`) ... User's token
+    + invitation_state (optional, string, `SEND`) ... Filter results to this state
+    + offset (required, number, `0`) ... First element of the list
+    + count (required, number, `5`) ... Number of element for the list
+
++ Response 200 (application/json)
+
+        {
+            "data":[
+            {
+                "groupId" : 1,
+                "groupName" : "Ben's family",
+                "groupExpiry" : null,
+                "creationDate" : "2013-10-31 08:00:00",
+                "state" : "ACCEPTED"
+            }, {
+                "id" : 2,
+                "group_id" : 2,
+                "group_name" : "Nadia's family",
+                "groupExpiry" : null,
+                "creationDate" : "2013-10-31 08:00:00",
+                "state" : "REFUSED"
+            }],
+            "nbElt": 2,
+            "offset": 0,
+            "nbTotal": 2
+        }
+
+## Invitation Count [/invitation/count?state={invitation_state}&token=zefopkezf]
+
+### Get invitation count for the user [GET]
+
++ User must be logged in
++ If state is null, no filtering is applied
+
++ Parameters
+
+    + token (required, string, `zefopkezf`) ... User's token
+    + invitation_state (optional, string, `SEND`) ... Filter results to this state
+
++ Response 200 (application/json)
+
+            14
+
 # Group Message
 
 **Message API**
