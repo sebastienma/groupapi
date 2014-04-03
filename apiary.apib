@@ -216,7 +216,7 @@ Manage the social groups of a user
             "nbTotal": 2
         }
         
-## My created groups [/group/myGroupList?offset=0&count=5]
+## My created groups [/group/myGroupList?offset={offset}&count={count}&name={name}]
 
 ### Get my group list [GET]
 
@@ -226,6 +226,7 @@ Manage the social groups of a user
 
     + offset (required, number, `0`) ... First element of the list
     + count (required, number, `5`) ... Number of element for the list
+    + name (string, `name`) ... Filter on the group name, strict search
 
 
 + Request
