@@ -146,7 +146,7 @@ Group API
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
-    + group_token (optional, string, `fzeopkfez`) ... token for PRIVATE-WITH-TOKEN group.
+    + group_token (string, `fzeopkfez`) ... Optional. token for PRIVATE-WITH-TOKEN group.
 
 + Request
 
@@ -427,7 +427,7 @@ Invitation API
 
 + Parameters
 
-    + invitation_state (optional, string, `SEND`) ... Filter results to this state
+    + invitation_state (string, `SEND`) ... Optional. Filter results to this state
     + offset (required, number, `0`) ... First element of the list
     + count (required, number, `5`) ... Number of element for the list
 
@@ -469,7 +469,7 @@ Invitation API
 
 + Parameters
 
-    + invitation_state (optional, string, `SEND`) ... Filter results to this state
+    + invitation_state (string, `SEND`) ... Optional. Filter results to this state
 
 + Request
 
