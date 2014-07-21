@@ -550,10 +550,10 @@ Message API
 
 ### Edit a single message [PUT]
 
-+ Edit a message
-+ Only group admin or creator of the message can edit a message.
-+ If ok, the raw is updated in the table message.
 + The state of the message can be updated (can be: REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED).
++ Anyone can change the status of the message to "MODERATED"
++ Only ROLE_ADMIN user can change status to "ABUSE_REPORTED" or "ABUSE_IGNORED"
++ Only owner of the message can change to "REMOVED_BY_USER"
 
 + Request (application/json)
 
@@ -564,7 +564,6 @@ Message API
     + Body
     
             {
-                "text" : "I hate Ben!",
                 "state": "MODERATED"
             }
 
