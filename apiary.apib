@@ -554,7 +554,7 @@ Message API
 + Anyone can change the status of the message to "ABUSE_REPORTED"
 + Only ROLE_ADMIN user can change status to "MODERATED" or "ABUSE_IGNORED"
 + Only owner of the message can change to "REMOVED_BY_USER"
-+ Each "ABUSE_REPORTED" is logged
++ If user has already sent an abuse, an error is thrown
 
 + Request (application/json)
 
