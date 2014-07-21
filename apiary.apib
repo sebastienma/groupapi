@@ -551,9 +551,10 @@ Message API
 ### Edit a single message [PUT]
 
 + The state of the message can be updated (can be: REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED).
-+ Anyone can change the status of the message to "MODERATED"
-+ Only ROLE_ADMIN user can change status to "ABUSE_REPORTED" or "ABUSE_IGNORED"
++ Anyone can change the status of the message to "ABUSE_REPORTED"
++ Only ROLE_ADMIN user can change status to "MODERATED" or "ABUSE_IGNORED"
 + Only owner of the message can change to "REMOVED_BY_USER"
++ Each "ABUSE_REPORTED" is logged
 
 + Request (application/json)
 
