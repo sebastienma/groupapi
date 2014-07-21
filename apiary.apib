@@ -596,9 +596,9 @@ Message API
 
 + The state of the message can be updated (can be: REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED).
 + Anyone can change the status of the message to "ABUSE_REPORTED"
-+ Only ROLE_ADMIN user can change status to "MODERATED" or "ABUSE_IGNORED"
-+ Only owner of the message can change to "REMOVED_BY_USER"
 + If user has already sent an abuse, an error is thrown
++ Only owner of the message can change to "REMOVED_BY_USER"
++ Only ROLE_ADMIN user can change status to "MODERATED" or "ABUSE_IGNORED"
 
 + Request (application/json)
 
