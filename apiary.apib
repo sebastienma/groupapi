@@ -544,7 +544,8 @@ Message API
             "text" : "I hate Ben !",
             "date" : "2013-10-31 08:00:00",
             "groupId": 1,
-            "userId": 1
+            "userId": 1,
+            "state": null
         }
 
 ### Edit a single message [PUT]
@@ -552,6 +553,7 @@ Message API
 + Edit a message
 + Only group admin or creator of the message can edit a message.
 + If ok, the raw is updated in the table message.
++ The state of the message can be updated. State can be one of the following values (REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED)
 
 + Request (application/json)
 
@@ -561,7 +563,10 @@ Message API
 
     + Body
     
-            {"text" : "I hate Ben !"}
+            {
+                "text" : "I hate Ben !",
+                "state": "MODERATED"
+            }
 
 + Response 200 (application/json)
 
@@ -570,7 +575,8 @@ Message API
             "text" : "I hate Ben !",
             "date" : "2013-10-31 08:00:00",
             "groupId": 1,
-            "userId": 1
+            "userId": 1,
+            "state": "MODERATED"
         }
 
         
@@ -620,13 +626,15 @@ Message API
                 "text" : "Hello everybody !",
                 "date" : "2013-10-31 08:00:00",
                 "groupId": 1,
-                "userId": 1
+                "userId": 1,
+                "state": "MODERATED"
             }, {
                 "id" : 2,
                 "text" : "Bye everybody !",
                 "date" : "2013-10-31 23:00:00",
                 "groupId": 1,
-                "userId": 1
+                "userId": 1,
+                "state": "MODERATED"
             }],
             "nbElt": 2,
             "offset": 0,
