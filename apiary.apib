@@ -520,11 +520,55 @@ Message API
             "userId": 1
         }
 
-## Single message of a Group  [/group/{group_id}/message/{message_id}]
+## Message list of a Group  [/group/{group_id}/message/list?offset={offset}&count={count}&state={state}]
+
+### Get the list [GET]
+
++ Get all messages of the group
++ Every body can read messages of a public group
++ For PRIVATE group, user must be in the member list of the group
 
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
+    + offset (required, number, `0`) ... First element of the list
+    + count (required, number, `5`) ... Number of element for the list
+    + state (string, `MODERATED`) ... State of the message (REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED).
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+
++ Response 200 (application/json)
+
+        {
+            "data":[{
+                "id" : 1,
+                "text" : "Hello everybody !",
+                "date" : "2013-10-31 08:00:00",
+                "groupId": 1,
+                "userId": 1,
+                "state": "MODERATED"
+            }, {
+                "id" : 2,
+                "text" : "Bye everybody !",
+                "date" : "2013-10-31 23:00:00",
+                "groupId": 1,
+                "userId": 1,
+                "state": null
+            }],
+            "nbElt": 2,
+            "offset": 0,
+            "nbTotal": 2
+        }
+        
+
+## Single message  [/message/{message_id}]
+
++ Parameters
+
     + message_id (required, number, `1`) ... Numeric `id` of the Message to perform action with.
 
 ### Get a single message [GET]
@@ -598,46 +642,3 @@ Message API
             "result" : "Message deleted with success"
         }
         
-## Message list of a Group  [/group/{group_id}/message/list?offset={offset}&count={count}&state={state}]
-
-### Get the list [GET]
-
-+ Get all messages of the group
-+ Every body can read messages of a public group
-+ For PRIVATE group, user must be in the member list of the group
-
-+ Parameters
-
-    + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
-    + offset (required, number, `0`) ... First element of the list
-    + count (required, number, `5`) ... Number of element for the list
-    + state (string, `MODERATED`) ... State of the message (REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED).
-
-+ Request
-
-    + Headers
-    
-            token: the token of the currently connected user
-
-+ Response 200 (application/json)
-
-        {
-            "data":[{
-                "id" : 1,
-                "text" : "Hello everybody !",
-                "date" : "2013-10-31 08:00:00",
-                "groupId": 1,
-                "userId": 1,
-                "state": "MODERATED"
-            }, {
-                "id" : 2,
-                "text" : "Bye everybody !",
-                "date" : "2013-10-31 23:00:00",
-                "groupId": 1,
-                "userId": 1,
-                "state": null
-            }],
-            "nbElt": 2,
-            "offset": 0,
-            "nbTotal": 2
-        }
