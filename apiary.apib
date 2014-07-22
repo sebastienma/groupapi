@@ -626,9 +626,11 @@ Message API
         
 ### Delete a single message [DELETE]
 
-+ Delete a message on a group
-+ Only group admin or creator of the message can delete a message.
++ Delete a message in a group.
 + If ok, the raw is deleted in the table message.
++ If user has ROLE_ADMIN, message is really removed from database
++ If the owner remove the message, the state will be "REMOVED_BY_USER"
++ If user is not owner of the message, an error is thrown
     
 + Request
 
