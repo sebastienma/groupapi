@@ -565,6 +565,34 @@ Message API
         }
         
 
+## Report abuse on a message [/message/{message_id}/abuse]
+
++ Parameters
+
+    + message_id (required, number, `1`) ... Numeric `id` of the Message to perform action with.
+
+### Post an abuse for a message [POST]
+
++ Anyone can report an abuse
++ If user has already sent an abuse, an error is thrown
+
++ Request (application/json)
+
+    + Headers
+    
+            token: the token of the currently connected user
+
++ Response 200 (application/json)
+
+        {
+            "id" : 1,
+            "text" : "I hate Ben!",
+            "date" : "2013-10-31 08:00:00",
+            "groupId": 1,
+            "userId": 1,
+            "state": "MODERATED"
+        }
+
 ## Single message  [/message/{message_id}]
 
 + Parameters
