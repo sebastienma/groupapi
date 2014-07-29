@@ -139,7 +139,7 @@ Group API
 + Every body can subscribe to a public group
 + A raw is added to the user_group table.
 + user_group table link user table and group table.
-+ Message is send to user to inform him that he was accepted to the group.
++ Message is sent to user to inform him that he was accepted in the group.
 + If group is "PRIVATE-WITH-TOKEN" type, user need to add the valid "group_token" parameter
 + If group is "PRIVATE" type, user need to be referenced in the invitation table
 
@@ -495,6 +495,7 @@ Message API
 + The message is added to the message table.
 + Message is send to all users of the group. It uses "favoriteProviderForNotification" field to send the message
 + Maximum text length is set on server side (group.properties file). Default is 200.
++ Type is a mandatory property when posting the message.
 
 + Parameters
 
@@ -509,19 +510,20 @@ Message API
 
 + Request (application/json)
     
-        {"text" : "I love Ben !"}
+        {"text": "I love Ben !", "type": 2 }
 
 + Response 200 (application/json)
 
         {
-            "id" : 1,
-            "text" : "I love Ben !",
-            "date" : "2013-10-31 08:00:00",
+            "id": 1,
+            "text": "I love Ben !",
+            "date": "2013-10-31 08:00:00",
             "groupId": 1,
-            "userId": 1
+            "userId": 1,
+            "type": 2
         }
 
-## Message list of a Group  [/group/{group_id}/message/list?offset={offset}&count={count}&state={state}]
+## Message list of a Group  [/group/{group_id}/message/list?offset={offset}&count={count}&state={state}&type={type}]
 
 ### Get the list [GET]
 
@@ -531,10 +533,11 @@ Message API
 
 + Parameters
 
-    + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
-    + offset (required, number, `0`) ... First element of the list
-    + count (required, number, `5`) ... Number of element for the list
-    + state (string, `MODERATED`) ... State of the message (REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED).
+    + group_id (required, number, `1`) ... Required. Numeric `id` of the Group to perform action with.
+    + offset (required, number, `0`) ... Required. First element of the list
+    + count (required, number, `5`) ... Required. Number of element for the list
+    + state (string, `MODERATED`) ... Optional. State of the message (REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED).
+    + type (string, `1`) ... Optional. Type of message to filter. to filter on message that have "null" type, send type=null.
 
 + Request
 
@@ -551,14 +554,16 @@ Message API
                 "date" : "2013-10-31 08:00:00",
                 "groupId": 1,
                 "userId": 1,
-                "state": "MODERATED"
+                "state": "MODERATED",
+                "type": 2
             }, {
                 "id" : 2,
                 "text" : "Bye everybody !",
                 "date" : "2013-10-31 23:00:00",
                 "groupId": 1,
                 "userId": 1,
-                "state": null
+                "state": null,
+                "type": 4
             }],
             "nbElt": 2,
             "offset": 0,
@@ -594,7 +599,8 @@ Message API
                  "userId":9762,
                  "date":1405523503000,
                  "state":"ABUSE_IGNORED",
-                 "abuseCount":1
+                 "abuseCount":1,
+                 "type": 1
               },
               {  
                  "text":"hey",
@@ -603,7 +609,8 @@ Message API
                  "userId":9762,
                  "date":1405587081000,
                  "state":"ABUSE_IGNORED",
-                 "abuseCount":1
+                 "abuseCount":1,
+                 "type": 4
               }
            ],
            "offset":0,
@@ -636,7 +643,8 @@ Message API
             "date" : "2013-10-31 08:00:00",
             "groupId": 1,
             "userId": 1,
-            "state": "MODERATED"
+            "state": "MODERATED",
+            "type": 5
         }
 
 ## Single message  [/message/{message_id}]
@@ -663,7 +671,8 @@ Message API
             "date" : "2013-10-31 08:00:00",
             "groupId": 1,
             "userId": 1,
-            "state": null
+            "state": null,
+            "type": 5
         }
 
 ### Edit a single message [PUT]
@@ -683,7 +692,8 @@ Message API
     + Body
     
             {
-                "state": "MODERATED"
+                "state": "MODERATED",
+                "type": 2
             }
 
 + Response 200 (application/json)
@@ -694,7 +704,8 @@ Message API
             "date" : "2013-10-31 08:00:00",
             "groupId": 1,
             "userId": 1,
-            "state": "MODERATED"
+            "state": "MODERATED",
+            "type": 2
         }
 
         
