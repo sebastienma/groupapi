@@ -495,7 +495,7 @@ Message API
 + The message is added to the message table.
 + Message is send to all users of the group. It uses "favoriteProviderForNotification" field to send the message
 + Maximum text length is set on server side (group.properties file). Default is 200.
-+ Type is a mandatory property when posting the message.
++ Type is a optional property when posting the message.
 
 + Parameters
 
@@ -537,7 +537,7 @@ Message API
     + offset (required, number, `0`) ... Required. First element of the list
     + count (required, number, `5`) ... Required. Number of element for the list
     + state (string, `MODERATED`) ... Optional. State of the message (REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED).
-    + type (string, `1`) ... Optional. Type of message to filter. to filter on message that have "null" type, send type=null.
+    + type (string, `1`) ... Optional. Type of message to filter. To filter on message that have "null" type, send type=null.
 
 + Request
 
