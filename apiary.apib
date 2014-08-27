@@ -569,7 +569,32 @@ Message API
             "offset": 0,
             "nbTotal": 2
         }
-        
+
+## Message list of a Group  [/group/{group_id}/message/count?&state={state}&type={type}]
+
+### Get the list [GET]
+
++ Get all messages of the group
++ Every body can count messages of a public group
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Required. Numeric `id` of the Group to perform action with.
+    + state (string, `MODERATED`) ... Optional. State of the message (REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED).
+    + type (string, `1`) ... Optional. Type of message to filter. To filter on message that have "null" type, send type=null.
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+
++ Response 200 (application/json)
+
+        {
+            "result": 2
+        }
+
 ## List reported abuses [/message/abuse/list?state={state}&count={count}&offset={offset}]
 
 + Parameters
