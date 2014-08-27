@@ -536,7 +536,7 @@ Message API
     + group_id (required, number, `1`) ... Required. Numeric `id` of the Group to perform action with.
     + offset (required, number, `0`) ... Required. First element of the list
     + count (required, number, `5`) ... Required. Number of element for the list
-    + state (string, `MODERATED`) ... Optional. State of the message (REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED). To filter on message that have "null" state, send state=null.
+    + state (string, `SIGNALED_BY_USER`) ... Optional. State of the message (SIGNALED_BY_USER, VALIDATED_BY_MODERATOR). To filter on message that have "null" state, send state=null.
     + type (string, `1`) ... Optional. Type of message to filter. To filter on message that have "null" type, send type=null.
 
 + Request
@@ -554,7 +554,7 @@ Message API
                 "date" : "2013-10-31 08:00:00",
                 "groupId": 1,
                 "userId": 1,
-                "state": "MODERATED",
+                "state": "PUBLISHED",
                 "type": 2
             }, {
                 "id" : 2,
@@ -580,7 +580,7 @@ Message API
 + Parameters
 
     + group_id (required, number, `1`) ... Required. Numeric `id` of the Group to perform action with.
-    + state (string, `MODERATED`) ... Optional. State of the message (REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED). To filter on message that have "null" state, send state=null.
+    + state (string, `PUBLISHED`) ... Optional. State of the message (SIGNALED_BY_USER, VALIDATED_BY_MODERATOR). To filter on message that have "null" state, send state=null.
     + type (string, `1`) ... Optional. Type of message to filter. To filter on message that have "null" type, send type=null.
 
 + Request
@@ -599,7 +599,7 @@ Message API
 
 + Parameters
 
-    + state (required, string, `MODERATED`) ... Filter on the message state (can be: MODERATED, ABUSE_REPORTED, ABUSE_IGNORED)
+    + state (required, string, `VALIDATED_BY_MODERATOR`) ... Filter on the message state (can be: SIGNALED_BY_USER, VALIDATED_BY_MODERATOR)
     + count (required, int, `10`) ... Page size of the returned data
     + offset (required, int, `10`) ... Page number of the returned data
 
@@ -623,7 +623,7 @@ Message API
                  "groupId":3,
                  "userId":9762,
                  "date":1405523503000,
-                 "state":"ABUSE_IGNORED",
+                 "state":"VALIDATED_BY_MODERATOR",
                  "abuseCount":1,
                  "type": 1
               },
@@ -633,7 +633,7 @@ Message API
                  "groupId":3,
                  "userId":9762,
                  "date":1405587081000,
-                 "state":"ABUSE_IGNORED",
+                 "state":"VALIDATED_BY_MODERATOR",
                  "abuseCount":1,
                  "type": 4
               }
@@ -668,7 +668,7 @@ Message API
             "date" : "2013-10-31 08:00:00",
             "groupId": 1,
             "userId": 1,
-            "state": "MODERATED",
+            "state": "VALIDATED_BY_MODERATOR",
             "type": 5
         }
 
@@ -725,11 +725,10 @@ Message API
 ### Edit a single message [PUT]
 
 + Text could not be updated
-+ The state of the message can be updated (can be: REMOVED_BY_USER, MODERATED, ABUSE_REPORTED, ABUSE_IGNORED).
-+ Anyone can change the status of the message to "ABUSE_REPORTED"
++ The state of the message can be updated (can be: SIGNALED_BY_USER, VALIDATED_BY_MODERATOR).
++ Anyone can change the status of the message to "SIGNALED_BY_USER"
 + If user has already sent an abuse, an error is thrown
-+ Only owner of the message can change to "REMOVED_BY_USER"
-+ Only ROLE_ADMIN user can change status to "MODERATED" or "ABUSE_IGNORED"
++ Only ROLE_ADMIN user can change status to "VALIDATED_BY_MODERATOR"
 
 + Request (application/json)
 
@@ -740,7 +739,7 @@ Message API
     + Body
     
             {
-                "state": "MODERATED",
+                "state": "VALIDATED_BY_MODERATOR",
                 "type": 2
             }
 
@@ -752,7 +751,7 @@ Message API
             "date" : "2013-10-31 08:00:00",
             "groupId": 1,
             "userId": 1,
-            "state": "MODERATED",
+            "state": "VALIDATED_BY_MODERATOR",
             "type": 2
         }
 
@@ -760,9 +759,6 @@ Message API
 ### Delete a single message [DELETE]
 
 + Delete a message in a group.
-+ If ok, the raw is deleted in the table message.
-+ If user has ROLE_ADMIN, message is really removed from database
-+ If the owner remove the message, the state will be "REMOVED_BY_USER"
 + If user is not owner of the message, an error is thrown
     
 + Request
