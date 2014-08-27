@@ -562,7 +562,7 @@ Message API
                 "date" : "2013-10-31 23:00:00",
                 "groupId": 1,
                 "userId": 1,
-                "state": null,
+                "state": "PUBLISHED",
                 "type": 4
             }],
             "nbElt": 2,
@@ -595,7 +595,7 @@ Message API
             "result": 2
         }
 
-## List reported abuses [/message/abuse/list?state={state}&count={count}&offset={offset}]
+## List reported abuses [/message/signal/list?state={state}&count={count}&offset={offset}]
 
 + Parameters
 
@@ -643,7 +643,7 @@ Message API
         }
 
 
-## Report abuse on a message [/message/{message_id}/abuse]
+## Report abuse on a message [/message/{message_id}/signal]
 
 + Parameters
 
@@ -672,6 +672,28 @@ Message API
             "type": 5
         }
 
+### Remove an abuse [DELETE]
+
++ If user has already sent an abuse, the abuse is removed
+
++ Request (application/json)
+
+    + Headers
+    
+            token: the token of the currently connected user
+
++ Response 200 (application/json)
+
+        {
+            "id" : 1,
+            "text" : "I hate Ben!",
+            "date" : "2013-10-31 08:00:00",
+            "groupId": 1,
+            "userId": 1,
+            "state": "PUBLISHED",
+            "type": 5
+        }
+        
 ## Single message  [/message/{message_id}]
 
 + Parameters
@@ -696,7 +718,7 @@ Message API
             "date" : "2013-10-31 08:00:00",
             "groupId": 1,
             "userId": 1,
-            "state": null,
+            "state": "PUBLISHED",
             "type": 5
         }
 
