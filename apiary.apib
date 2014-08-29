@@ -364,7 +364,7 @@ Invitation API
                 "groupId" : 2,
                 "userId" : "5456",
                 "state" : "SEND",
-                "date" : "2013-10-31 08:00:00
+                "date" : "2013-10-31T08:00
             }
 
 ## An invitation [/invitation/{group_id}]
@@ -445,14 +445,14 @@ Invitation API
                 "groupId" : 1,
                 "groupName" : "Ben's family",
                 "groupExpiry" : null,
-                "creationDate" : "2013-10-31 08:00:00",
+                "creationDate" : "2013-10-31T08:00",
                 "state" : "ACCEPTED"
             }, {
                 "id" : 2,
                 "group_id" : 2,
                 "group_name" : "Nadia's family",
                 "groupExpiry" : null,
-                "creationDate" : "2013-10-31 08:00:00",
+                "creationDate" : "2013-10-31T08:00",
                 "state" : "REFUSED"
             }],
             "nbElt": 2,
@@ -517,9 +517,11 @@ Message API
         {
             "id": 1,
             "text": "I love Ben !",
-            "date": "2013-10-31 08:00:00",
+            "date": "2013-10-31T08:00",
             "groupId": 1,
-            "userId": 1,
+            "user": {
+                "id: 1
+            },
             "type": 2
         }
 
@@ -551,8 +553,8 @@ Message API
         {
             "data":[{
                 "id" : 1,
-                "text" : "Hello everybody !",
-                "date" : "2013-10-31 08:00:00",
+                "text" : "Hello everybody!",
+                "date" : "2013-10-31T08:00",
                 "groupId": 1,
                 "user": {
                     "id: 1,
@@ -565,7 +567,7 @@ Message API
                 "type": 2
             }, {
                 "id" : 2,
-                "text" : "Bye everybody !",
+                "text" : "Bye everybody!",
                 "date" : "2013-10-31 23:00:00",
                 "groupId": 1,
                 "user": {
@@ -606,24 +608,28 @@ Message API
         {  
            "data":[  
               {  
-                 "text":"hey",
-                 "id":3,
-                 "groupId":3,
-                 "userId":9762,
-                 "date":1405523503000,
-                 "state":"VALIDATED_BY_MODERATOR",
-                 "abuseCount":1,
-                 "type": 1
+                "text":"hey",
+                "id":3,
+                "groupId":3,
+                "user": {
+                    "id: 1
+                },
+                "date":"2013-10-31T08:00",
+                "state":"VALIDATED_BY_MODERATOR",
+                "abuseCount":1,
+                "type": 1
               },
               {  
-                 "text":"hey",
-                 "id":6,
-                 "groupId":3,
-                 "userId":9762,
-                 "date":1405587081000,
-                 "state":"VALIDATED_BY_MODERATOR",
-                 "abuseCount":1,
-                 "type": 4
+                "text":"hey",
+                "id":6,
+                "groupId":3,
+                "user": {
+                    "id: 1
+                },
+                "date":"2013-10-31T08:00",
+                "state":"VALIDATED_BY_MODERATOR",
+                "abuseCount":1,
+                "type": 4
               }
            ],
            "offset":0,
@@ -653,9 +659,11 @@ Message API
         {
             "id" : 1,
             "text" : "I hate Ben!",
-            "date" : "2013-10-31 08:00:00",
+            "date" : "2013-10-31T08:00",
             "groupId": 1,
-            "userId": 1,
+            "user": {
+                "id: 1
+            },
             "state": "VALIDATED_BY_MODERATOR",
             "type": 5
         }
@@ -675,9 +683,11 @@ Message API
         {
             "id" : 1,
             "text" : "I hate Ben!",
-            "date" : "2013-10-31 08:00:00",
+            "date" : "2013-10-31T08:00",
             "groupId": 1,
-            "userId": 1,
+            "user": {
+                "id: 1
+            },
             "state": "PUBLISHED",
             "type": 5
         }
@@ -703,9 +713,11 @@ Message API
         {
             "id" : 1,
             "text" : "I hate Ben!",
-            "date" : "2013-10-31 08:00:00",
+            "date" : "2013-10-31T08:00",
             "groupId": 1,
-            "userId": 1,
+            "user": {
+                "id: 1
+            },
             "state": "PUBLISHED",
             "type": 5
         }
@@ -737,9 +749,11 @@ Message API
         {
             "id" : 1,
             "text" : "I hate Ben!",
-            "date" : "2013-10-31 08:00:00",
+            "date" : "2013-10-31T08:00",
             "groupId": 1,
-            "userId": 1,
+            "user": {
+                "id: 1
+            },
             "state": "VALIDATED_BY_MODERATOR",
             "type": 2
         }
