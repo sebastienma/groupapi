@@ -527,15 +527,20 @@ Message API
 
 ## Message list of a Group  [/group/{group_id}/message/list?offset={offset}&count={count}&state={state}&type={type}&userData={userData}]
 
-### Get the list [GET]
+### Send a message on a group [POST]
 
-+ Get all messages of the group
-+ Every body can read messages of a public group
-+ For PRIVATE group, user must be in the member list of the group
++ Post a message on a group
++ User need to be a member of the group
++ Every user of public group can post message if readonly = false
++ The message is added to the message table.
++ Message is send to all users of the group. It uses "favoriteProviderForNotification" field to send the message
++ Maximum text length is set on server side (group.properties file). Default is 200.
++ Type is a optional property when posting the message.
 
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
+
 
 + Request
 
