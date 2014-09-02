@@ -527,19 +527,18 @@ Message API
 
 ## Message list of a Group  [/group/{group_id}/message/list?offset={offset}&count={count}&state={state}&type={type}&userData={userData}]
 
-### Send a message on a group [POST]
+### Get message list of a group [GET]
 
-+ Post a message on a group
-+ User need to be a member of the group
-+ Every user of public group can post message if readonly = false
-+ The message is added to the message table.
-+ Message is send to all users of the group. It uses "favoriteProviderForNotification" field to send the message
-+ Maximum text length is set on server side (group.properties file). Default is 200.
-+ Type is a optional property when posting the message.
++ Get message list of a group
 
 + Parameters
 
     + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
+    + userData (optional, string, `nickname, avatar`) ... Optional, filter on the message state (can be all the keys of the user data)
+    + type (optional, string, `1`) ... Optional, filter on the message type
+    + state (optional, string, `VALIDATED_BY_MODERATOR`) ... Optional, filter on the message state (can be: SIGNALED_BY_USER, VALIDATED_BY_MODERATOR)
+    + count (required, int, `10`) ... Page size of the returned data
+    + offset (required, int, `10`) ... Page number of the returned data
 
 
 + Request
@@ -585,6 +584,30 @@ Message API
             "nbTotal": 2
         }
 
+## Message list of a Group  [/group/{group_id}/message/vout?state={state}&type={type}]
+
+### Get message count in a group [GET]
+
++ Get message list of a group
+
++ Parameters
+
+    + group_id (required, number, `1`) ... Numeric `id` of the Group to perform action with.
+    + type (optional, string, `1`) ... Optional, filter on the message type
+    + state (optional, string, `VALIDATED_BY_MODERATOR`) ... Optional, filter on the message state (can be: SIGNALED_BY_USER, VALIDATED_BY_MODERATOR)
+
++ Request
+
+    + Headers
+    
+            token: the token of the currently connected user
+
++ Response 200 (application/json)
+
+        {
+            "count": 2
+        }
+        
 ## List reported abuses [/message/signal/list?state={state}&count={count}&offset={offset}]
 
 + Parameters
